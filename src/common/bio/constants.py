@@ -151,5 +151,5 @@ def get_lesk_color_mapping():
         [255, 255, 255],  # A - White 0,0,0 - 1
         [255, 255, 0],  # C - Yellow 255,255,0 - 2
         [255, 0, 0],  # T - Red - 3
-        [255, 0, 0],  # G - Red - 4
+        [0, 255, 0],  # G - Green - 4
      ]), tf.float32)
