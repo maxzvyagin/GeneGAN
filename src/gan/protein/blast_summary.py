@@ -17,8 +17,8 @@ class BlastSummary(threading.Thread):
 
     def run(self):
         try:
-            # self.run_blast()
-            print("Not running BLAST.")
+            self.run_blast()
+            # print("Not running BLAST.")
         except Exception as e:
             tf.logging.warning("Unexpected error in BlastSummary thread:", str(e))
 
