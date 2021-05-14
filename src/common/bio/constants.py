@@ -138,3 +138,18 @@ NON_STANDARD_AMINO_ACIDS = ['B', 'O', 'U', 'X', 'Z', 'J']
 #         [255, 0, 255],  # Y - Magenta 255, 0, 255 - 20
 #
 #     ]), tf.float32)
+
+def get_lesk_color_mapping():
+    """
+    Args:
+
+    Returns:
+         amino acid color mapping
+    """
+    return tf.cast(tf.constant([
+        [0, 0, 0],  # 0 - black - 0
+        [255, 255, 255],  # A - White 0,0,0 - 1
+        [255, 255, 0],  # C - Yellow 255,255,0 - 2
+        [255, 0, 0],  # T - Red - 3
+        [255, 0, 0],  # G - Red - 4
+        [255, 0, 255] ]), tf.float32)
