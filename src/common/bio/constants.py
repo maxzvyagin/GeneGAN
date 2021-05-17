@@ -1,4 +1,5 @@
 import tensorflow as tf
+from itertools import product
 import numpy as np
 np.random.seed(0)
 
