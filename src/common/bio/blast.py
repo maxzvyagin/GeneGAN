@@ -6,6 +6,7 @@ from Bio.Blast import NCBIWWW
 from Bio.Blast import NCBIXML
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+import pdb
 
 
 def blast_seq(input_seq, only_first_match=False, alignments=500, descriptions=500, hitlist_size=50):
@@ -80,6 +81,7 @@ def get_local_blast_results(data_dir, db_path, fasta):
         f.write(fasta)
 
     # TODO: Enzyme class
+    pdb.set_trace()
     blastp = subprocess.Popen(
         ['blastn', '-db', db_path, "-max_target_seqs", "1", "-outfmt", "10 qseqid score evalue pident",
          "-matrix", "BLOSUM45", "-query", query_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
