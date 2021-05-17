@@ -52,7 +52,7 @@ def get_blast_record(seq, alignments, descriptions, hitlist_size):
       single Blast record
 
     """
-    result_handle = NCBIWWW.qblast(program="blastp", database="nr", alignments=alignments,
+    result_handle = NCBIWWW.qblast(program="blastn", database="nr", alignments=alignments,
                                    descriptions=descriptions,
                                    hitlist_size=hitlist_size, sequence=seq)
     blast_record = NCBIXML.read(result_handle)
@@ -81,7 +81,7 @@ def get_local_blast_results(data_dir, db_path, fasta):
 
     # TODO: Enzyme class
     blastp = subprocess.Popen(
-        ['blastp', '-db', db_path, "-max_target_seqs", "1", "-outfmt", "10 qseqid score evalue pident",
+        ['blastn', '-db', db_path, "-max_target_seqs", "1", "-outfmt", "10 qseqid score evalue pident",
          "-matrix", "BLOSUM45", "-query", query_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     results, err = blastp.communicate()
