@@ -10,7 +10,7 @@ REAL_PROTEINS = "real_proteins"
 FAKE_PROTEINS = "fake_proteins"
 CLASS_MAPPING = "class_mapping"
 LABELS = "labels"
-NUM_AMINO_ACIDS = 5
+NUM_AMINO_ACIDS = 97
 SEQ_LENGTH = "seq_length"
 
 

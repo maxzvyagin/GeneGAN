@@ -50,7 +50,7 @@ class ResnetGenerator(Generator):
         if self.output_shape[2] == 1:
             out = tf.nn.tanh(ops.snconv2d(h_act, 1, (self.output_shape[0], 1), name='last_conv'), name="generated")
         else:
-            out = tf.nn.tanh(ops.snconv2d(h_act, 5, (1, 1), name='last_conv'), name="generated")
+            out = tf.nn.tanh(ops.snconv2d(h_act, 97, (1, 1), name='last_conv'), name="generated")
         tf.summary.histogram("Generated_results", out, family=self.scope_name)
         print("GENERATED SHAPE", out.shape)
         return out

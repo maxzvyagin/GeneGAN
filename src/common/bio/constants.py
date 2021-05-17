@@ -1,4 +1,6 @@
 import tensorflow as tf
+import numpy as np
+np.random.seed(0)
 
 # ID_TO_SMILES_CHARACTER = {0: ' ',
 #                           1: '(',
@@ -92,17 +94,37 @@ import tensorflow as tf
 #                     'W': 19,
 #                     'Y': 20}
 
-ID_TO_AMINO_ACID = {0: '0',
-                    1: 'A',
-                    2: 'C',
-                    3: 'T',
-                    4: 'G'}
+# ID_TO_AMINO_ACID = {0: '0',
+#                     1: 'A',
+#                     2: 'C',
+#                     3: 'T',
+#                     4: 'G'}
+#
+# AMINO_ACID_TO_ID = {'0': 0,
+#                     'A': 1,
+#                     'C': 2,
+#                     'T': 3,
+#                     'G': 4}
 
-AMINO_ACID_TO_ID = {'0': 0,
-                    'A': 1,
-                    'C': 2,
-                    'T': 3,
-                    'G': 4}
+all_permutations = list(product(["A", "T", "C", "G", "0"], repeat=3))
+tuple_codon_permutations = list(filter(lambda i: i[1] != "0", all_permutations))
+tuple_codon_permutations = list(
+    filter(lambda x: not (x[0] == "0" and x[-1] == "0"), codon_permutations)
+)
+
+codon_permutations = []
+for i in tuple_codon_permutations:
+    codon_permutations.append("".join(i))
+
+codon_permutations.insert(0, '000')
+
+ID_TO_AMINO_ACID = {}
+for i in range(len(codon_permutations)):
+    ID_TO_AMINO_ACID[i] = codon_permutations[i]
+
+AMINO_ACID_TO_ID = {}
+for i in range(len(codon_permutations)):
+    AMINO_ACID_TO_ID[codon_permutations[i]] = i
 
 NON_STANDARD_AMINO_ACIDS = ['B', 'O', 'U', 'X', 'Z', 'J']
 
@@ -139,6 +161,10 @@ NON_STANDARD_AMINO_ACIDS = ['B', 'O', 'U', 'X', 'Z', 'J']
 #
 #     ]), tf.float32)
 
+colors = []
+for i in range(len(codon_permutations)):
+    colors.append(list(np.random.choice(range(256), size=3)))
+
 def get_lesk_color_mapping():
     """
     Args:
@@ -146,10 +172,4 @@ def get_lesk_color_mapping():
     Returns:
          amino acid color mapping
     """
-    return tf.cast(tf.constant([
-        [0, 0, 0],  # 0 - black - 0
-        [255, 255, 255],  # A - White 0,0,0 - 1
-        [255, 255, 0],  # C - Yellow 255,255,0 - 2
-        [255, 0, 0],  # T - Red - 3
-        [0, 255, 0],  # G - Green - 4
-     ]), tf.float32)
+    return tf.cast(tf.constant(colors), tf.float32)

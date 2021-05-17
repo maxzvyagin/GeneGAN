@@ -73,7 +73,7 @@ class Protein(object):
             self.add_proteins_to_tensorboard(d_scores, "real", labels[0], real_to_display)
 
     def convert_real_to_one_hot(self, real_x): # Label smoothing?
-        real_to_display = tf.one_hot(real_x, 5, axis=1)
+        real_to_display = tf.one_hot(real_x, 97, axis=1)
         real_to_display = tf.transpose(real_to_display, perm=[0, 2, 1])
         return real_to_display
 
@@ -179,7 +179,7 @@ class Protein(object):
         for reaction in self.reactions:
             # label = tf.convert_to_tensor(reaction[0])
             r = [pad_up_to(tf.convert_to_tensor(reaction[i]), [self.config.compound_w], self.config.dynamic_padding) for
-                 i in range(1, 5)]
+                 i in range(1, 97)]
             reaction_tensors.append(r)
         reaction_tensors = tf.stack(reaction_tensors)
         return tf.gather_nd(reaction_tensors, tf.expand_dims(labels, axis=1))
