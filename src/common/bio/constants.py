@@ -110,7 +110,7 @@ np.random.seed(0)
 all_permutations = list(product(["A", "T", "C", "G", "0"], repeat=3))
 tuple_codon_permutations = list(filter(lambda i: i[1] != "0", all_permutations))
 tuple_codon_permutations = list(
-    filter(lambda x: not (x[0] == "0" and x[-1] == "0"), codon_permutations)
+    filter(lambda x: not (x[0] == "0" and x[-1] == "0"), tuple_codon_permutations)
 )
 
 codon_permutations = []
